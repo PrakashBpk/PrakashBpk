@@ -8,8 +8,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-import 'Users.dart';
-
 class Revised extends StatefulWidget {
   final List list;
   final int index;
@@ -21,8 +19,6 @@ class Revised extends StatefulWidget {
 }
 
 class _RevisedState extends State<Revised> {
-  List<User> _users;
-  bool _loading;
   String dropdownvalue = 'Revised';
   var items = [
     'Revised',
@@ -193,15 +189,10 @@ class _RevisedState extends State<Revised> {
               editData("approved", statuschangetime);
               // date = DateTime.now();
               //revisedd();
-              Navigator.of(context)
-                  .push(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => JsonParseDemo()),
-                  )
-                  .then((users) => setState(() {
-                        _users = users;
-                        _loading = true;
-                      }));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) => JsonParseDemo()),
+              );
             },
           ),
           /*  MaterialButton(

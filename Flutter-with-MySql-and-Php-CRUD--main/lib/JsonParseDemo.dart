@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mysql_crud/admin_dash.dart';
-import 'package:flutter_mysql_crud/forwarddetails.dart';
 import 'package:flutter_mysql_crud/pendingdetails.dart';
 import 'package:flutter_mysql_crud/randomcolor.dart';
 import 'package:flutter_mysql_crud/reviseddetails.dart';
@@ -11,11 +8,6 @@ import 'denieddetails.dart';
 import 'services.dart';
 import 'Users.dart';
 import 'Constants.dart';
-
-/* main() {
-  const oneSec = Duration(seconds: 1);
-  Timer.periodic(oneSec, (Timer t) => print('hi!'));
-} */
 
 class JsonParseDemo extends StatefulWidget {
   //
@@ -26,7 +18,6 @@ class JsonParseDemo extends StatefulWidget {
 
 class _JsonParseDemoState extends State<JsonParseDemo> {
   //
-  Timer timer;
   List<User> _users;
   bool _loading;
   @override
@@ -39,8 +30,6 @@ class _JsonParseDemoState extends State<JsonParseDemo> {
         _loading = false;
       });
     });
-    /*  main();
-    timer = Timer.periodic(Duration(seconds: 2), (Timer t) => JsonParseDemo()); */
   }
 
   @override
@@ -102,7 +91,7 @@ class _JsonParseDemoState extends State<JsonParseDemo> {
               ListTile(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => JsonParseDemo()));
+                      MaterialPageRoute(builder: (_) => ApprovedDetails()));
                 },
                 leading: Icon(Icons.analytics),
                 title: Text('DashBoard'),
@@ -206,14 +195,6 @@ class _JsonParseDemoState extends State<JsonParseDemo> {
                         {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (_) => adminDash()));
-                        }
-                        break;
-                      case "forward":
-                        {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => ForwardDetails()));
                         }
                         break;
                       default:

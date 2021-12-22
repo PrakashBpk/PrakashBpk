@@ -1,4 +1,4 @@
-// ignore_for_file: equal_keys_in_map, unnecessary_brace_in_string_interps
+// ignore_for_file: equal_keys_in_map
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,6 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 import 'package:email_auth/email_auth.dart';
 
-import 'Users.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_widgets.dart';
 
@@ -33,8 +32,6 @@ class Edit extends StatefulWidget {
 
 class _EditState extends State<Edit> {
   String dropdownvalue = 'Approved';
-  List<User> _users;
-  bool _loading;
   var items = [
     'Approved',
     'Denied',
@@ -169,67 +166,6 @@ class _EditState extends State<Edit> {
     });
   }
 
-  /* Future sendmail() async {
-    var url = Uri.parse("http://14.141.213.116:861/adddata.php");
-    var response = await http.post(url, body: {
-      "name": cname.text,
-      "salesexcutivename": cmobile.text,
-      "branch": branch,
-      "carmodel": carmodel,
-      "yearmake": yearmake.text,
-      "currentoffer": currentoffer.text,
-      "discountvalue": discountvalue.text,
-      "customerstatus": existingornew.text,
-      "referredcustomer": referredcustomer.text,
-      "referrername": referrername.text,
-      "requeststatus": requeststatus,
-      "booking_id": bookingId.text
-    });
-
-    var data;
-    if (data == "Error") {
-      Fluttertoast.showToast(
-          msg: "Request already exist!",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER);
-    } else {
-      await FlutterSession().set('token', cname.text);
-      Fluttertoast.showToast(
-          msg: "Request Saved Successful",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER);
-
-      String username = 'geekdinoabt@gmail.com';
-      String password = 'ityqalqiqhuzbola';
-      String domainSmtp = 'smtp.gmail.com';
-
-      //also use for gmail smtp
-      //final smtpServer = gmail(username, password);
-
-      //user for your own domain
-      final smtpServer = SmtpServer(domainSmtp,
-          username: username, password: password, port: 587);
-
-      final message = Message()
-        ..from = Address(username, 'New Request from ${cmobile.text}')
-        ..recipients.add('praveen.mca043@gmail.com')
-        ..subject = 'New Request Submitted'
-        ..text = ''
-        ..html =
-            "<p>Booking_Id: ${bookingId.text}</p>\n<p>Name: ${cname.text}</p>\n <p>Field Sales Executive name: ${cmobile.text}</p> \n <p>Branch: ${branch}</p> \n <p>Car Model: ${carmodel}</p> \n <p>year make: ${yearmake.text}</p> \n \n <p>Current Offer: ${currentoffer.text}</p> \n <p>Discount Value: ${discountvalue.text}</p> \n <p>Are you Existing Customer?: ${existingornew.text}</p> \n <p>Are you Referred Customer?: ${referredcustomer.text}</p> \n <p>Referrer Name: ${referrername.text}</p>";
-
-      try {
-        final sendReport = await send(message, smtpServer);
-        print('Message sent: ' + sendReport.toString());
-      } on MailerException catch (e) {
-        print('Message not sent.');
-        for (var p in e.problems) {
-          print('Problem: ${p.code}: ${p.msg}');
-        }
-      }
-    }
-  } */
-
   @override
   void initState() {
     bookingId =
@@ -259,8 +195,7 @@ class _EditState extends State<Edit> {
     getAllCategory();
     approve();
     denied();
-    setState(() {});
-    //sendmail();
+    // sendmail();
   }
 
   @override
@@ -385,18 +320,11 @@ class _EditState extends State<Edit> {
                         dateToday.toString().substring(0, 10);
                     editData("approved", statuschangetime);
 
-                    Navigator.of(context)
-                        .push(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  JsonParseDemo()),
-                        )
-                        .then((users) => setState(() {
-                              _users = users;
-                              _loading = false;
-                            }));
-
-                    print("refresh done ");
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => JsonParseDemo()),
+                    );
+                    print('Button pressed ...');
                   },
                   text: 'Approved',
                   //  icon: Icon(Icons.thumb_up_alt),
@@ -426,17 +354,10 @@ class _EditState extends State<Edit> {
                         dateToday.toString().substring(0, 10);
                     editData("denied", statuschangetime);
                     // denied();
-                    Navigator.of(context)
-                        .push(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  JsonParseDemo()),
-                        )
-                        .then((users) => setState(() {
-                              _users = users;
-                              _loading = true;
-                            }));
-
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => JsonParseDemo()),
+                    );
                     print('Button pressed ...');
                   },
                   text: 'Denied',
@@ -466,16 +387,6 @@ class _EditState extends State<Edit> {
                     String statuschangetime =
                         dateToday.toString().substring(0, 10);
                     editData("revised", statuschangetime);
-                    Navigator.of(context)
-                        .push(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  JsonParseDemo()),
-                        )
-                        .then((users) => setState(() {
-                              _users = users;
-                              _loading = false;
-                            }));
                   },
                   text: 'Revised',
                   options: FFButtonOptions(
@@ -504,17 +415,6 @@ class _EditState extends State<Edit> {
                     String statuschangetime =
                         dateToday.toString().substring(0, 10);
                     editData("forward", statuschangetime);
-                    Navigator.of(context)
-                        .push(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  JsonParseDemo()),
-                        )
-                        .then((users) => setState(() {
-                              _users = users;
-                              _loading = true;
-                            }));
-                    // sendmail();
                   },
                   text: 'Forward',
                   options: FFButtonOptions(

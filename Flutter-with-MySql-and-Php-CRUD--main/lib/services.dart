@@ -1,12 +1,5 @@
-import 'dart:async';
-
 import 'package:http/http.dart' as http;
 import 'package:flutter_mysql_crud/Users.dart';
-
-/* main() {
-  const oneSec = Duration(seconds: 1);
-  Timer.periodic(oneSec, (Timer t) => print('hi!'));
-} */
 
 class Services {
   //

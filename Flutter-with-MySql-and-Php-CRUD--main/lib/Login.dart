@@ -2,8 +2,7 @@
 import 'package:flutter_mysql_crud/JsonParseDemo.dart';
 import 'package:flutter_mysql_crud/newdata.dart';
 import 'package:flutter_mysql_crud/tapbarchecking.dart';
-import 'package:flutter_mysql_crud/userpage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -69,7 +68,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
-    print(message);
+
     // If the Response Message is Matched.
     if (message == 'Login Matched') {
       // Hiding the CircularProgressIndicator.
@@ -278,7 +277,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: userLogin,
-
                         /* async {
                           if (adminpassword == "admin1") {
                             // navigate to the desired route
@@ -393,10 +391,4 @@ class _LoginWidgetState extends State<LoginWidget> {
       ),
     );
   }
-}
-
-Future<void> userLogin(String email) async {
-  final prefs = await SharedPreferences.getInstance();
-
-  prefs.setString('email', email);
 }

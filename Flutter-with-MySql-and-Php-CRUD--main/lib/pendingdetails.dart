@@ -6,8 +6,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'JsonParseDemo.dart';
-import 'Users.dart';
 import 'details.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_widgets.dart';
@@ -21,10 +19,6 @@ import 'newdata.dart';
       ),
       home: adminDash(),
     )); */
-/* main() {
-  const oneSec = Duration(seconds: 1);
-  Timer.periodic(oneSec, (Timer t) => print('hi!'));
-} */
 
 class PendingDetails extends StatefulWidget {
   @override
@@ -72,39 +66,7 @@ class _PendingDetailsState extends State<PendingDetails> {
 class Items extends StatelessWidget {
   List list;
   var count;
-  List<User> _users;
-  bool _loading;
   Items({this.list});
-  void editData(String requeststatus, statuschangetime) {
-    var url = "http://14.141.213.116:861/editdata.php";
-    var i;
-    var widget;
-    http.post(url, body: {
-      'id': widget.list[widget.index]['id'],
-      /*  "booking_id": bookingId.text,
-      "name": cname.text,
-      "salesexcutivename": cmobile.text,
-      "branch": branch.text,
-      "carmodel": carmodel.text,
-      "yearmake": yearmake.text,
-      "currentoffer": currentoffer.text,
-      "discountvalue": discountvalue.text,
-      "customerstatus": existingornew.text,
-      "referredcustomer": referredcustomer.text,
-      "referrername": referrername.text, */
-      "requeststatus": requeststatus,
-      "statuschangetime": statuschangetime //categoryItemlist
-      //"requeststatus": denied(),
-      // "requeststatus": reviseed()
-    });
-  }
-
-  @override
-  void initState() {
-    // super.initState();
-    // setState(() {});
-    // editData(requeststatus, statuschangetime);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -205,170 +167,112 @@ class Items extends StatelessWidget {
                     )
                   ],
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 5, 0, 0),
-                      child: FFButtonWidget(
-                        onPressed: () {
-                          DateTime dateToday = new DateTime.now();
-                          String statuschangetime =
-                              dateToday.toString().substring(0, 10);
-                          editData("denied", statuschangetime);
-                          // denied();
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    JsonParseDemo()),
-                          );
-                          /* .then((users) => setState(() {
-                                    _users = users;
-                                    _loading = true;
-                                  })); */
-
-                          print('Button pressed ...');
-                        },
-                        text: 'Approved',
-                        options: FFButtonOptions(
-                          width: 70,
-                          height: 40,
-                          color: Color(0xFF7FD35A),
-                          textStyle: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Roboto',
-                            color: Colors.white,
-                          ),
-                          borderSide: BorderSide(
-                            color: Color(0xE862E37B),
-                            width: 1,
-                          ),
-                          borderRadius: 12,
+                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(10, 5, 0, 0),
+                    child: FFButtonWidget(
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Edit(list: list, index: i),
                         ),
+                      ),
+                      text: 'Next',
+                      options: FFButtonOptions(
+                        width: 70,
+                        height: 40,
+                        color: Color(0xFF7FD35A),
+                        textStyle: FlutterFlowTheme.bodyText1.override(
+                          fontFamily: 'Roboto',
+                          color: Colors.white,
+                        ),
+                        borderSide: BorderSide(
+                          color: Color(0xE862E37B),
+                          width: 1,
+                        ),
+                        borderRadius: 12,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 5, 0, 0),
-                      child: FFButtonWidget(
-                        onPressed: () {
-                          DateTime dateToday = new DateTime.now();
-                          String statuschangetime =
-                              dateToday.toString().substring(0, 10);
-                          editData("denied", statuschangetime);
-                          // denied();
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    JsonParseDemo()),
-                          );
-                          /*  .then((users) => setState(() {
-                                    _users = users;
-                                    _loading = true;
-                                  })); */
-
-                          print('Button pressed ...');
-                        },
-                        text: 'Denied',
-                        options: FFButtonOptions(
-                          width: 70,
-                          height: 40,
-                          color: Color(0xFFE98282),
-                          textStyle: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Roboto',
-                            color: Colors.white,
-                            fontSize: 14,
+                  ),
+                ]),
+                /* Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(10, 5, 0, 0),
+                          child: FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: 'Denied',
+                            options: FFButtonOptions(
+                              width: 70,
+                              height: 40,
+                              color: Color(0xFFE98282),
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Roboto',
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
+                            ),
                           ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
                         ),
-                      ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(10, 5, 0, 0),
+                          child: FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: 'Revise',
+                            options: FFButtonOptions(
+                              width: 70,
+                              height: 40,
+                              color: Color(0xFFEAA74A),
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Poppins',
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(10, 5, 0, 0),
+                          child: FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: 'Forward',
+                            options: FFButtonOptions(
+                              width: 70,
+                              height: 40,
+                              color: Color(0xFF4E9EED),
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Roboto',
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 5, 0, 0),
-                      child: FFButtonWidget(
-                        onPressed: () {
-                          DateTime dateToday = new DateTime.now();
-                          String statuschangetime =
-                              dateToday.toString().substring(0, 10);
-                          editData("denied", statuschangetime);
-                          // denied();
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    JsonParseDemo()),
-                          );
-                          /*  .then((users) => setState(() {
-                                    _users = users;
-                                    _loading = true;
-                                  })); */
-
-                          print('Button pressed ...');
-                        },
-                        text: 'Revise',
-                        options: FFButtonOptions(
-                          width: 70,
-                          height: 40,
-                          color: Color(0xFFEAA74A),
-                          textStyle: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Poppins',
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 5, 0, 0),
-                      child: FFButtonWidget(
-                        onPressed: () {
-                          DateTime dateToday = new DateTime.now();
-                          String statuschangetime =
-                              dateToday.toString().substring(0, 10);
-                          editData("denied", statuschangetime);
-                          // denied();
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    JsonParseDemo()),
-                          );
-                          /*  .then((users) => setState(() {
-                                    _users = users;
-                                    _loading = true;
-                                  })); */
-
-                          print('Button pressed ...');
-                        },
-                        text: 'Forward',
-                        options: FFButtonOptions(
-                          width: 70,
-                          height: 40,
-                          color: Color(0xFF4E9EED),
-                          textStyle: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Roboto',
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                Divider(
-                  thickness: 3,
-                  color: Color(0xE8B7A5D1),
-                )
+                    Divider(
+                      thickness: 3,
+                      color: Color(0xE8B7A5D1),
+                    ) */
               ],
             ),
           ));
@@ -387,6 +291,4 @@ class Items extends StatelessWidget {
           // print('list');
         });
   }
-
-  setState(Null Function() param0) {}
 }

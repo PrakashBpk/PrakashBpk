@@ -342,46 +342,6 @@ class _NewDataState extends State<NewData> {
           children: [
             Expanded(
               child: TextFormField(
-                controller: yearmake,
-                obscureText: false,
-                decoration: InputDecoration(
-                  labelText: 'Year Of making',
-                  labelStyle: FlutterFlowTheme.subtitle2.override(
-                    fontFamily: 'Roboto',
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0x00000000),
-                      width: 1,
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(4.0),
-                      topRight: Radius.circular(4.0),
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0x00000000),
-                      width: 1,
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(4.0),
-                      topRight: Radius.circular(4.0),
-                    ),
-                  ),
-                ),
-                style: FlutterFlowTheme.subtitle2.override(
-                  fontFamily: 'Roboto',
-                ),
-              ),
-            )
-          ],
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: TextFormField(
                 controller: currentoffer,
                 obscureText: false,
                 decoration: InputDecoration(
@@ -581,41 +541,16 @@ class _NewDataState extends State<NewData> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(65, 0, 0, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(130, 0, 0, 0),
               child: FFButtonWidget(
                 onPressed: () {
                   print('Button pressed ...');
                   sendmail("pending");
-                  // clearText();
+                  clearText();
                 },
                 text: 'Submit',
                 options: FFButtonOptions(
-                  width: 85,
-                  height: 40,
-                  color: Colors.purple,
-                  textStyle: FlutterFlowTheme.subtitle2.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                  ),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: 12,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(85, 0, 0, 0),
-              child: FFButtonWidget(
-                onPressed: () {
-                  /* print('Button pressed ...');
-                  sendmail("pending"); */
-                  clearText();
-                },
-                text: 'Clear',
-                options: FFButtonOptions(
-                  width: 85,
+                  width: 130,
                   height: 40,
                   color: Color(0xFFEBA889),
                   textStyle: FlutterFlowTheme.subtitle2.override(
@@ -633,122 +568,125 @@ class _NewDataState extends State<NewData> {
           ],
         )
 
-        /*    TextField(
-          controller: bookingId,
-          decoration: InputDecoration(
-              hintText: "Enter the BookingID", labelText: "BookingID"),
-        ),
-        TextField(
-          controller: cname,
-          decoration: InputDecoration(
-              hintText: "Enter Name", labelText: "Customer Name"),
-        ),
-        TextField(
-          controller: cmobile,
-          decoration: InputDecoration(
-              hintText: "Field Sales excutive name",
-              labelText: "Field Sales excutive name"),
-        ),
         /*  TextField(
+            controller: bookingId,
+            decoration: InputDecoration(
+                hintText: "Enter the BookingID", labelText: "BookingID"),
+          ), */
+
+        /*  TextField(
+            controller: cname,
+            decoration: InputDecoration(
+                hintText: "Enter Name", labelText: "Customer Name"),
+          ),
+          TextField(
+            controller: cmobile,
+            decoration: InputDecoration(
+                hintText: "Field Sales excutive name",
+                labelText: "Field Sales excutive name"),
+          ),
+          /*  TextField(
             controller: branch,
             decoration:
                 InputDecoration(hintText: "Enter Branch", labelText: "Branch"),
           ), */
-        DropdownButton(
-          //controller:requeststatus,
-          isExpanded: true,
-          hint: Text("Select the Branch"),
-          value: branch,
-          icon: Icon(Icons.keyboard_arrow_down),
-          items: branchItemlist.map((branch) {
-            return DropdownMenuItem(
-                value: branch['branch'], child: Text(branch['branch']));
-          }).toList(),
-          onChanged: (Value) {
-            setState(() {
-              branch = Value;
-            });
-          },
-        ),
-        DropdownButton(
-          //controller:requeststatus,
-          isExpanded: true,
-          hint: Text("Select the Car Model"),
-          value: carmodel,
-          icon: Icon(Icons.keyboard_arrow_down),
-          items: carItemlist.map((carmodel) {
-            return DropdownMenuItem(
-                value: carmodel['carmodel'], child: Text(carmodel['carmodel']));
-          }).toList(),
-          onChanged: (Value) {
-            setState(() {
-              carmodel = Value;
-            });
-          },
-        ),
-        /* TextField(
+          DropdownButton(
+            //controller:requeststatus,
+            isExpanded: true,
+            hint: Text("Select the Branch"),
+            value: branch,
+            icon: Icon(Icons.keyboard_arrow_down),
+            items: branchItemlist.map((branch) {
+              return DropdownMenuItem(
+                  value: branch['branch'], child: Text(branch['branch']));
+            }).toList(),
+            onChanged: (Value) {
+              setState(() {
+                branch = Value;
+              });
+            },
+          ),
+          DropdownButton(
+            //controller:requeststatus,
+            isExpanded: true,
+            hint: Text("Select the Car Model"),
+            value: carmodel,
+            icon: Icon(Icons.keyboard_arrow_down),
+            items: carItemlist.map((carmodel) {
+              return DropdownMenuItem(
+                  value: carmodel['carmodel'],
+                  child: Text(carmodel['carmodel']));
+            }).toList(),
+            onChanged: (Value) {
+              setState(() {
+                carmodel = Value;
+              });
+            },
+          ),
+          /* TextField(
             controller: carmodel,
             decoration: InputDecoration(
                 hintText: "Enter Car Model", labelText: "Car Model"),
           ), */
-        TextField(
-          controller: yearmake,
-          decoration: InputDecoration(
-              hintText: "Enter Year Make", labelText: "Year Make"),
-        ),
-        TextField(
-          controller: currentoffer,
-          decoration: InputDecoration(
-              hintText: "Enter Current Offer", labelText: "Current Offer"),
-        ),
-        TextField(
-          controller: discountvalue,
-          decoration: InputDecoration(
-              hintText: "Enter Discount Value", labelText: "Discount Value"),
-        ),
-        TextField(
-          controller: existingornew,
-          decoration: InputDecoration(
-              hintText: "Enter Existing or new",
-              labelText: "Are You Existing Customer or new ?"),
-        ),
-        TextField(
-          controller: referredcustomer,
-          decoration: InputDecoration(
-              hintText: "Enter Yes or No",
-              labelText: "Are You Referred Customer?"),
-        ),
-        TextField(
-          controller: referrername,
-          decoration: InputDecoration(
-              hintText: "Enter Referrer Name", labelText: "Referrer Name"),
-        ),
-        FFButtonWidget(
-          onPressed: () {
-            // addData();
-            sendmail("pending");
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (BuildContext context) => adminDash()),
-            );
-          },
-          text: 'Click to Submit ',
-          options: FFButtonOptions(
-            width: 20,
-            height: 40,
-            color: Color(0xFFE98282),
-            textStyle: FlutterFlowTheme.subtitle2.override(
-              fontFamily: 'Roboto',
-              color: Colors.white,
-              fontSize: 14,
-            ),
-            borderSide: BorderSide(
-              color: Colors.transparent,
-              width: 1,
-            ),
-            borderRadius: 12,
+          TextField(
+            controller: yearmake,
+            decoration: InputDecoration(
+                hintText: "Enter Year Make", labelText: "Year Make"),
           ),
-        ), */
-        /*  MaterialButton(
+          TextField(
+            controller: currentoffer,
+            decoration: InputDecoration(
+                hintText: "Enter Current Offer", labelText: "Current Offer"),
+          ),
+          TextField(
+            controller: discountvalue,
+            decoration: InputDecoration(
+                hintText: "Enter Discount Value", labelText: "Discount Value"),
+          ),
+          TextField(
+            controller: existingornew,
+            decoration: InputDecoration(
+                hintText: "Enter Existing or new",
+                labelText: "Are You Existing Customer or new ?"),
+          ),
+          TextField(
+            controller: referredcustomer,
+            decoration: InputDecoration(
+                hintText: "Enter Yes or No",
+                labelText: "Are You Referred Customer?"),
+          ),
+          TextField(
+            controller: referrername,
+            decoration: InputDecoration(
+                hintText: "Enter Referrer Name", labelText: "Referrer Name"),
+          ),
+          FFButtonWidget(
+            onPressed: () {
+              // addData();
+              sendmail("pending");
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) => adminDash()),
+              );
+            },
+            text: 'Click to Submit ',
+            options: FFButtonOptions(
+              width: 20,
+              height: 40,
+              color: Color(0xFFE98282),
+              textStyle: FlutterFlowTheme.subtitle2.override(
+                fontFamily: 'Roboto',
+                color: Colors.white,
+                fontSize: 14,
+              ),
+              borderSide: BorderSide(
+                color: Colors.transparent,
+                width: 1,
+              ),
+              borderRadius: 12,
+            ),
+          ),
+          /*  MaterialButton(
             child: Text("Submit"),
             color: Colors.red,
             onPressed: () {
@@ -760,6 +698,7 @@ class _NewDataState extends State<NewData> {
               );
             },
           ), */
+        ], */
       ]),
     );
   }
