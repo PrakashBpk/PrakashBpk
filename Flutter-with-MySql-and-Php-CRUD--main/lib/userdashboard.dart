@@ -7,12 +7,13 @@ import 'package:flutter_mysql_crud/forwarddetails.dart';
 import 'package:flutter_mysql_crud/newdata.dart';
 import 'package:flutter_mysql_crud/pendingdetails.dart';
 import 'package:flutter_mysql_crud/randomcolor.dart';
-import 'package:flutter_mysql_crud/reports.dart';
 import 'package:flutter_mysql_crud/reviseddetails.dart';
+import 'package:flutter_mysql_crud/userUser.dart';
+import 'package:flutter_mysql_crud/userservice.dart';
 import 'approveddetails.dart';
 import 'denieddetails.dart';
 import 'services.dart';
-import 'Users.dart';
+//import 'UUsers.dart';
 import 'Constants.dart';
 
 /* main() {
@@ -20,24 +21,24 @@ import 'Constants.dart';
   Timer.periodic(oneSec, (Timer t) => print('hi!'));
 } */
 
-class JsonParseDemo extends StatefulWidget {
+class UserDashboard extends StatefulWidget {
   //
-  JsonParseDemo() : super();
+  UserDashboard() : super();
   @override
-  _JsonParseDemoState createState() => _JsonParseDemoState();
+  _UserDashboardState createState() => _UserDashboardState();
 }
 
-class _JsonParseDemoState extends State<JsonParseDemo> {
+class _UserDashboardState extends State<UserDashboard> {
   //
   Timer timer;
-  List<User> _users;
+  List<UUser> _users;
   //List request = [];
   bool _loading;
   @override
   void initState() {
     super.initState();
     _loading = true;
-    Services.getUsers().then((users) {
+    SServices.getUsers().then((users) {
       setState(() {
         _users = users;
         _loading = false;
@@ -106,7 +107,7 @@ class _JsonParseDemoState extends State<JsonParseDemo> {
               ListTile(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => JsonParseDemo()));
+                      MaterialPageRoute(builder: (_) => UserDashboard()));
                 },
                 leading: Icon(Icons.analytics),
                 title: Text('DashBoard'),
@@ -122,7 +123,7 @@ class _JsonParseDemoState extends State<JsonParseDemo> {
               ListTile(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => ReportsWidget()));
+                      MaterialPageRoute(builder: (_) => UserDashboard()));
                 },
                 leading: Icon(Icons.report_sharp),
                 title: Text('Reports'),
@@ -149,7 +150,7 @@ class _JsonParseDemoState extends State<JsonParseDemo> {
                       (orientation == Orientation.portrait) ? 2 : 2),
               itemCount: null == _users ? 0 : _users.length,
               itemBuilder: (context, index) {
-                User user = _users[index];
+                UUser user = _users[index];
                 // request = user.requeststatus as List;
                 // print(request);
                 print(user.requeststatus);
@@ -219,14 +220,14 @@ class _JsonParseDemoState extends State<JsonParseDemo> {
                                     builder: (_) => ApprovedDetails()));
                           }
                           break;
-                        case "revised":
+                        /*  case "revised":
                           {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => RevisedDetails()));
                           }
-                          break;
+                          break; */
                         case "pending":
                           {
                             Navigator.push(

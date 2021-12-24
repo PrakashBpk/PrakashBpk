@@ -8,17 +8,23 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-class Revised extends StatefulWidget {
-  final List list;
-  final int index;
+import 'Users.dart';
+import 'flutter_flow/flutter_flow_theme.dart';
+import 'flutter_flow/flutter_flow_widgets.dart';
 
-  Revised({this.list, this.index});
+class Revised extends StatefulWidget {
+  //final List list;
+  //final int index;
+
+  //Revised({this.list, this.index});
 
   @override
   _RevisedState createState() => _RevisedState();
 }
 
 class _RevisedState extends State<Revised> {
+  List<User> _users;
+  bool _loading;
   String dropdownvalue = 'Revised';
   var items = [
     'Revised',
@@ -30,6 +36,7 @@ class _RevisedState extends State<Revised> {
 
   //String reviseddate = DateTime.now();
   DateTime date;
+  TextEditingController bookingId;
   TextEditingController cname;
   TextEditingController cmobile;
   TextEditingController branch;
@@ -46,11 +53,12 @@ class _RevisedState extends State<Revised> {
   //String Approvedbutton = 'Approved';
   void editData(String requeststatus, statuschangetime) {
     //reviseddate=DateTime.now();
-    var url = "http://14.141.213.116:861/revised.php";
+    var url = "http://14.141.213.116:861/revisedupdate.php";
     http.post(url, body: {
-      'id': widget.list[widget.index]['id'],
-      "name": cname.text,
-      "salesexcutivename": cmobile.text,
+      // 'id': widget.list[widget.index]['id'],
+      "bookingId": bookingId,
+      //"name": cname.text,
+      /* "salesexcutivename": cmobile.text,
       "branch": branch.text,
       "carmodel": carmodel.text,
       "yearmake": yearmake.text,
@@ -58,7 +66,7 @@ class _RevisedState extends State<Revised> {
       "discountvalue": discountvalue.text,
       "customerstatus": existingornew.text,
       "referredcustomer": referredcustomer.text,
-      "referrername": referrername.text,
+      "referrername": referrername.text,*/
       "requeststatus": requeststatus,
       "revised": revised.text,
       "commants": commants.text,
@@ -69,7 +77,7 @@ class _RevisedState extends State<Revised> {
 
   @override
   void initState() {
-    cname = TextEditingController(text: widget.list[widget.index]['name']);
+    /*  cname = TextEditingController(text: widget.list[widget.index]['name']);
     cmobile = TextEditingController(
         text: widget.list[widget.index]['salesexcutivename']);
     branch = TextEditingController(text: widget.list[widget.index]['branch']);
@@ -93,7 +101,7 @@ class _RevisedState extends State<Revised> {
     revised =
         TextEditingController(text: widget.list[widget.index]['revisedvalue']);
     commants =
-        TextEditingController(text: widget.list[widget.index]['commants']);
+        TextEditingController(text: widget.list[widget.index]['commants']); */
     super.initState();
     revisedd();
   }
@@ -103,71 +111,76 @@ class _RevisedState extends State<Revised> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFEBA889),
-        title: Text("Revised Request ${widget.list[widget.index]['name']}"),
+        title: Text("Revised  "), //${widget.list[widget.index]['name']}
       ),
-      body: ListView(
-        children: [
-          //Text('salesexcutivename'),
-          TextField(
-            controller: cname,
-            readOnly: true,
-            decoration: InputDecoration(
-                hintText: "Customer Name", labelText: "Customer Name"),
-          ),
-          TextField(
-            controller: cmobile,
-            readOnly: true,
-            decoration: InputDecoration(
-                hintText: "Field Sales excutive name",
-                labelText: "Field Sales excutive name"),
-          ),
-          TextField(
-            controller: branch,
-            readOnly: true,
-            decoration:
-                InputDecoration(hintText: "Enter Branch", labelText: "Branch"),
-          ),
-          TextField(
-            controller: carmodel,
-            readOnly: true,
-            decoration: InputDecoration(
-                hintText: "Enter Car Model", labelText: "Car Model"),
-          ),
-          TextField(
-            controller: yearmake,
-            decoration: InputDecoration(
-                hintText: "Enter Year Make", labelText: "Year Make"),
-          ),
-          TextField(
-            controller: currentoffer,
-            decoration: InputDecoration(
-                hintText: "Enter Current Offer", labelText: "Current Offer"),
-            readOnly: true,
-          ),
-          TextField(
-            controller: discountvalue,
-            readOnly: true,
-            decoration: InputDecoration(
-                hintText: "Enter Discount Value", labelText: "Discount Value"),
-          ),
-          TextField(
-            controller: revised,
-            decoration: InputDecoration(
-                hintText: "Enter the New Revised value",
-                labelText: "Enter the New Revised value"),
-          ),
-          TextField(
-            controller: commants,
-            decoration: InputDecoration(
-                hintText: "Enter The Commants",
-                labelText: "Enter The Commants"),
-          ),
-          /*       TextField(
+      body: ListView(children: [
+        //Text('salesexcutivename'),
+        TextField(
+          controller: bookingId,
+
+          // enabled: false,
+          decoration:
+              InputDecoration(hintText: "Booking Id", labelText: "Booking Id"),
+        ),
+        /* TextField(
+          controller: cname,
+          readOnly: true,
+          decoration: InputDecoration(
+              hintText: "Customer Name", labelText: "Customer Name"),
+        ),
+        TextField(
+          controller: cmobile,
+          readOnly: true,
+          decoration: InputDecoration(
+              hintText: "Field Sales excutive name",
+              labelText: "Field Sales excutive name"),
+        ),
+        TextField(
+          controller: branch,
+          readOnly: true,
+          decoration:
+              InputDecoration(hintText: "Enter Branch", labelText: "Branch"),
+        ),
+        TextField(
+          controller: carmodel,
+          readOnly: true,
+          decoration: InputDecoration(
+              hintText: "Enter Car Model", labelText: "Car Model"),
+        ),
+        TextField(
+          controller: yearmake,
+          decoration: InputDecoration(
+              hintText: "Enter Year Make", labelText: "Year Make"),
+        ),
+        TextField(
+          controller: currentoffer,
+          decoration: InputDecoration(
+              hintText: "Enter Current Offer", labelText: "Current Offer"),
+          readOnly: true,
+        ),
+        TextField(
+          controller: discountvalue,
+          readOnly: true,
+          decoration: InputDecoration(
+              hintText: "Enter Discount Value", labelText: "Discount Value"),
+        ), */
+        TextField(
+          controller: revised,
+          decoration: InputDecoration(
+              hintText: "Enter the New Revised value",
+              labelText: "Enter the New Revised value"),
+        ),
+        TextField(
+          controller: commants,
+          decoration: InputDecoration(
+              hintText: "Enter The Commants", labelText: "Enter The Commants"),
+        ),
+        /*       TextField(
             controller: referrername,
             decoration: InputDecoration(
                 hintText: "Enter Referrer Name", labelText: "Referrer Name"),
           ), */
-          /* DropdownButton(
+        /* DropdownButton(
             //controller:requeststatus,
             value: dropdownvalue,
 
@@ -181,7 +194,8 @@ class _RevisedState extends State<Revised> {
               });
             },
           ), */
-          MaterialButton(
+        /* MaterialButton(
+            color: Color(0xFFEBA889),
             child: Text("Move to Approved"),
             onPressed: () {
               DateTime dateToday = new DateTime.now();
@@ -189,13 +203,58 @@ class _RevisedState extends State<Revised> {
               editData("approved", statuschangetime);
               // date = DateTime.now();
               //revisedd();
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (BuildContext context) => JsonParseDemo()),
-              );
+              Navigator.of(context)
+                  .push(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => JsonParseDemo()),
+                  )
+                  .then((users) => setState(() {
+                        _users = users;
+                        _loading = true;
+                      }));
             },
-          ),
-          /*  MaterialButton(
+          ), */
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(150, 40, 0, 0),
+              child: FFButtonWidget(
+                onPressed: () {
+                  DateTime dateToday = new DateTime.now();
+                  String statuschangetime =
+                      dateToday.toString().substring(0, 10);
+                  editData("approved", statuschangetime);
+                  // date = DateTime.now();
+                  //revisedd();
+                  Navigator.of(context)
+                      .push(
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => JsonParseDemo()),
+                      )
+                      .then((users) => setState(() {
+                            _users = users;
+                            _loading = true;
+                          }));
+                },
+                text: 'Submit',
+                options: FFButtonOptions(
+                  width: 85,
+                  height: 40,
+                  color: Color(0xFFEBA889),
+                  textStyle: FlutterFlowTheme.subtitle2.override(
+                    fontFamily: 'Roboto',
+                    color: Colors.white,
+                  ),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: 12,
+                ),
+              ),
+            )
+            /*  MaterialButton(
             child: Text("Denied"),
             onPressed: () {
               editData();
@@ -205,8 +264,9 @@ class _RevisedState extends State<Revised> {
               );
             },
           ), */
-        ],
-      ),
+          ],
+        ),
+      ]),
     );
   }
 }

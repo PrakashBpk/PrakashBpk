@@ -1,5 +1,6 @@
 //import '../dashboard/dashboard_widget.dart';
 import 'package:flutter_mysql_crud/JsonParseDemo.dart';
+import 'package:flutter_mysql_crud/forgetpassword.dart';
 import 'package:flutter_mysql_crud/newdata.dart';
 import 'package:flutter_mysql_crud/tapbarchecking.dart';
 import 'package:flutter_mysql_crud/userpage.dart';
@@ -341,7 +342,7 @@ class _UserLoginWidgetState extends State<UserLoginWidget> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => JsonParseDemo(),
+                              builder: (context) => ResetLoginWidget(),
                             ),
                           );
                         },

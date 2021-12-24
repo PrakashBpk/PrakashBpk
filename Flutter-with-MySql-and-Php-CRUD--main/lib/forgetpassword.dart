@@ -1,8 +1,8 @@
 //import '../dashboard/dashboard_widget.dart';
 import 'package:flutter_mysql_crud/JsonParseDemo.dart';
-import 'package:flutter_mysql_crud/forgetpassword.dart';
 import 'package:flutter_mysql_crud/newdata.dart';
 import 'package:flutter_mysql_crud/tapbarchecking.dart';
+import 'package:flutter_mysql_crud/userlogin.dart';
 import 'package:flutter_mysql_crud/userpage.dart';
 
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -15,14 +15,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key key}) : super(key: key);
+import 'Login.dart';
+
+class ResetLoginWidget extends StatefulWidget {
+  const ResetLoginWidget({Key key}) : super(key: key);
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _ResetLoginWidgetState createState() => _ResetLoginWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _ResetLoginWidgetState extends State<ResetLoginWidget> {
   //TextEditingController emailAddressController;
   // TextEditingController passwordController;
   bool passwordVisibility;
@@ -47,9 +49,10 @@ class _LoginWidgetState extends State<LoginWidget> {
   //passwordVisibility = false;
   // Getting value from TextField widget.
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final conformpasswordController = TextEditingController();
 
-  Future userLogin() async {
+  /* Future userLogin() async {
     // Showing CircularProgressIndicator.
     setState(() {
       visible = true;
@@ -60,7 +63,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     String password = passwordController.text;
 
     // SERVER LOGIN API URL
-    var url = Uri.parse('http://14.141.213.116:861/login_user.php');
+    var url = Uri.parse('http://14.141.213.116:861/userlogin.php');
 
     // Store all data with Param Name.
     var data = {'email': email, 'password': password};
@@ -80,7 +83,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
       // Navigate to Profile Screen & Sending Email to Next Screen.
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => JsonParseDemo()));
+          context, MaterialPageRoute(builder: (context) => UserWidget()));
     } else {
       // If Email or Password did not Matched.
       // Hiding the CircularProgressIndicator.
@@ -107,7 +110,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       );
     }
   }
-
+ */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,7 +151,48 @@ class _LoginWidgetState extends State<LoginWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 0),
                         child: Text(
-                          'DAAPP',
+                          'Forget Password',
+                          style: FlutterFlowTheme.title1.override(
+                            fontFamily: 'Roboto',
+                            color: FlutterFlowTheme.tertiaryColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                /* Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 90),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        child: Text(
+                          'Forget',
+                          style: FlutterFlowTheme.title1.override(
+                            fontFamily: 'Roboto',
+                            color: FlutterFlowTheme.tertiaryColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ), */
+                /*   Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: Text(
+                          'Forget',
                           style: FlutterFlowTheme.title1.override(
                             fontFamily: 'Roboto',
                             color: FlutterFlowTheme.tertiaryColor,
@@ -159,7 +203,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       )
                     ],
                   ),
-                ),
+                ), */
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                   child: Row(
@@ -173,11 +217,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                             controller: emailController,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Username',
+                              labelText: 'Enter Your Username',
                               labelStyle: FlutterFlowTheme.bodyText1.override(
                                 fontFamily: 'Lexend Deca',
                                 color: Color(0xFF95A1AC),
-                                fontSize: 14,
+                                fontSize: 15,
                                 fontWeight: FontWeight.normal,
                               ),
                               enabledBorder: OutlineInputBorder(
@@ -219,10 +263,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                     children: [
                       Expanded(
                         child: TextFormField(
-                          controller: passwordController,
+                          controller: newPasswordController,
                           obscureText: !passwordVisibility,
                           decoration: InputDecoration(
-                            labelText: 'Password',
+                            labelText: 'New Password',
                             labelStyle: FlutterFlowTheme.bodyText1.override(
                               fontFamily: 'Lexend Deca',
                               color: Color(0xFF95A1AC),
@@ -271,6 +315,66 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ],
                   ),
                 ),
+                /*  Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: conformpasswordController,
+                          obscureText: !passwordVisibility,
+                          decoration: InputDecoration(
+                            labelText: 'Conform Password',
+                            labelStyle: FlutterFlowTheme.bodyText1.override(
+                              fontFamily: 'Lexend Deca',
+                              color: Color(0xFF95A1AC),
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFDBE2E7),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFDBE2E7),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(16, 24, 24, 24),
+                            suffixIcon: InkWell(
+                              onTap: () => setState(
+                                () => passwordVisibility = !passwordVisibility,
+                              ),
+                              child: Icon(
+                                passwordVisibility
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                                color: Color(0xFF95A1AC),
+                                size: 22,
+                              ),
+                            ),
+                          ),
+                          style: FlutterFlowTheme.bodyText1.override(
+                            fontFamily: 'Roboto',
+                            color: Color(0xFFF29A74),
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ), */
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                   child: Row(
@@ -278,7 +382,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FFButtonWidget(
-                        onPressed: userLogin,
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    title: Text('Reset Success'),
+                                    content: Text('Reset Success'),
+                                  ));
+                        },
                         /* async {
                           if (adminpassword == "admin1") {
                             // navigate to the desired route
@@ -309,7 +420,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ));
                           }
                         }, */
-                        text: 'Login',
+                        text: 'Reset',
                         options: FFButtonOptions(
                           width: 150,
                           height: 50,
@@ -342,11 +453,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ResetLoginWidget(),
+                              builder: (context) => LoginWidget(),
                             ),
                           );
                         },
-                        text: 'Forgot Password?',
+                        text: 'Back to Login',
                         options: FFButtonOptions(
                           width: 170,
                           height: 30,
@@ -368,8 +479,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                     )
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 150, 0, 0),
+                /*  Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -378,14 +489,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                         'Powered by ABT Maruti',
                         style: FlutterFlowTheme.bodyText1.override(
                           fontFamily: 'Roboto',
-                          color: Colors.black,
+                          color: FlutterFlowTheme.tertiaryColor,
                           fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.italic,
                         ),
                       )
                     ],
                   ),
-                )
+                ) */
               ],
             ),
           ),

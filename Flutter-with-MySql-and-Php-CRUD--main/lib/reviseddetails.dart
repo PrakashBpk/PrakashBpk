@@ -38,14 +38,14 @@ class _RevisedDetailsState extends State<RevisedDetails> {
         title: Text("Revised Lists"),
         backgroundColor: Color(0xFFEBA889),
       ),
-      floatingActionButton: FloatingActionButton(
+      /*  floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext contex) => NewData(),
           ),
         ),
         child: Icon(Icons.add),
-      ),
+      ), */
       body: FutureBuilder<List>(
         future: getData(),
         builder: (ctx, ss) {
@@ -82,7 +82,7 @@ class Items extends StatelessWidget {
             trailing: Icon(Icons.keyboard_arrow_right),
             //subtitle: Text(list[i]['salesexcutivename']),
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => Revised(list: list, index: i),
+              builder: (BuildContext context) => Revised(),
             )),
           );
           // print('list');
